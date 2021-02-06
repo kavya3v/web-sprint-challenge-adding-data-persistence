@@ -2,7 +2,7 @@
  
 const db=require('../../data/dbConfig');
 
-module.exports={getResources,addResource}
+module.exports={getResources,addResource,getResourceById}
 
 async function getResources(){
     const resources= await db("resources");

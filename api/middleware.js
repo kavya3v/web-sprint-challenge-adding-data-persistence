@@ -1,8 +1,13 @@
 module.exports={
     validateProjectBody,
     validateResourceBody,
-    validateTaskBody,}
-  
+    validateTaskBody,
+validateProjectId,
+validateResourceId}
+
+const dbModel= require('.././data/dbConfig');
+const projectModel =require('./project/model');
+const resourceModel=require('./resource/model');
     
     //projects
     function validateProjectBody(req,res,next){
@@ -38,5 +43,27 @@ module.exports={
             next(err)
         }else{
             next()
+        }
+    }
+
+    //project ID
+    async function validateProjectId(req,res,next){
+        const project= await projectModel.getProjectById(req.params.id)
+        if(project){
+            req.project=project
+            next()
+        }else{
+            res.status(404).json({message: "project ID invalid"})
+        }
+    }
+
+     //resource ID
+     async function validateResourceId(req,res,next){
+        const resource= await resourceModel.getResourceById(req.params.id)
+        if(resource){
+            req.resource=resource
+            next()
+        }else{
+            res.status(404).json({message: "resource ID invalid"})
         }
     }

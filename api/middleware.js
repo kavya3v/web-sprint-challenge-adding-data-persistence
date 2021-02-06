@@ -6,19 +6,22 @@ module.exports={
     
     //projects
     function validateProjectBody(req,res,next){
-        if ((!req.body.project_name) || (!req.body.project_description) || (!req.body.project_completed)){
-            const err=new Error("Please provide Project name/description and completed status")
+        console.log('pro',req.body)
+        if (!req.body.project_name) {
+            console.log('here')
+            const err=new Error("Please provide Project name")
             err.statusCode=400;
             next(err)
-        }else{
+        }
+        else{
             next()
         }
     }
     
     //resources
     function validateResourceBody(req,res,next){
-        if ((!req.body.resource_name) || (!req.body.resource_description) ){
-            const err=new Error("Please provide name and description for the resource")
+        if (!req.body.resource_name){
+            const err=new Error("Please provide name for the resource")
             err.statusCode=400;
             next(err)
         }else{
@@ -29,12 +32,11 @@ module.exports={
     //tasks
      
     function validateTaskBody(req,res,next){
-        if ((!req.body.task_description) || (!req.body.task_notes) ||(!req.body.project_id) ){
-            const err=new Error("Please provide description,notes and project ID for the task")
+        if (!req.body.task_description ||!req.body.project_id){
+            const err=new Error("Please provide description and project ID for the task")
             err.statusCode=400;
             next(err)
         }else{
             next()
         }
     }
-    

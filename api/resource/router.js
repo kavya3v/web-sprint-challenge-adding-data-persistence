@@ -6,8 +6,8 @@ const dbModel= require('./model');
  
 router.get('/', async (req,res,next)=>{
      try {
-      const projects= await dbModel.getResources();
-      res.status(200).json(projects)
+      const resources= await dbModel.getResources();
+      res.status(200).json(resources)
      } catch (err) {
            next(err)
      }  
